@@ -16,7 +16,7 @@ export class PgService implements OnModuleDestroy, OnModuleInit {
             port: 5432,
             user: 'postgres',
             password: 'Mehriddin',
-            database: 'rentalCar',
+            database: 'rentcar',
         });
     }
     async fetchData(query: string, ...params: any[]): Promise<any> {
