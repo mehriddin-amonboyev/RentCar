@@ -4,21 +4,23 @@ import {
     OnModuleInit,
     Injectable
 } from "@nestjs/common";
+import { ConfigService } from '@nestjs/config'
 import { Client } from "pg";
 
 @Injectable()
 export class PgService implements OnModuleDestroy, OnModuleInit {
     #_client: Client;
 
-    constructor() {
+    constructor(private readonly config: ConfigService) {
         this.#_client = new Client({
-            host: 'localhost',
-            port: 5432,
-            user: 'postgres',
-            password: 'Mehriddin',
-            database: 'rentcar',
+            host: config.get<string>('database.host'),
+            port: config.get<number>('database.port'),
+            user: config.get<string>('database.user'),
+            password: config.get<string>('database.password'),
+            database: config.get<string>('database.dbName'),
         });
     }
+    
     async fetchData(query: string, ...params: any[]): Promise<any> {
         try {
             const { rows } = await this.#_client.query(query, params);

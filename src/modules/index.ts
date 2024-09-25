@@ -1,2 +1,2 @@
-export * from "./movie"
-export * from "./market"
+export * from "./car"
+// export * from "./user"
