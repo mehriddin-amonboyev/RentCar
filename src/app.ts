@@ -10,8 +10,6 @@ import dbConfig from './config/db.config';
       load: [dbConfig],
     }),
     CarModule
-  ],
-  // controllers: [CarController],
-  // providers:[CarService],
+  ]
 })
 export class AppModule { }

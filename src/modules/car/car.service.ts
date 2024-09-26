@@ -2,15 +2,16 @@ import { Injectable } from "@nestjs/common";
 import { PgService } from "@postgres";
 import { CreateCarRequest, CreateCarResponse } from "./interfaces";
 import { ApiFeature } from "@utils";
+import { CreateCarDto } from "./dtos";
 
-export declare interface Car {
-    id: number,
-    brand: string,
-    model: string,
-    year: number,
-    rentalPrice: number,
-    available: { type: Boolean, default: true }
-}
+// export declare interface Car {
+//     id: number,
+//     brand: string,
+//     model: string,
+//     year: number,
+//     rentalPrice: number,
+//     available: { type: Boolean, default: true }
+// }
 
 @Injectable()
 export class CarService {
@@ -32,10 +33,12 @@ export class CarService {
             data
         };
     }
+    
     async getSingleCar(carId: number): Promise<any> {
         return await this.postgres.fetchData("SELECT * FROM car WHERE id=$1", carId);
     }
-    async createCar(payload: CreateCarRequest): Promise<any> {
+
+    async createCar(payload: CreateCarDto): Promise<any> {
         const newCar = await this.postgres.fetchData(
             `INSERT INTO car(brand, model,year, rentalPrice, available) VALUES ($1, $2, $3, $4, $5)`,
             payload.brand,

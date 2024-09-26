@@ -1,13 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app';
-import {morgan} from 'morgan';
+import { morgan } from 'morgan';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { LoggerMiddleware } from './middleware';
 
 
 async function startApp() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService)
+
+  // app.use(new LoggerMiddleware().use);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -20,9 +23,9 @@ async function startApp() {
     }),
   );
 
-  if (process.env.NODE_ENV.trim() == 'development') {
-    app.use(morgan('tiny'));
-  }
+  // if (process.env.NODE_ENV.trim() == 'development') {
+  //   app.use(morgan('tiny'));
+  // }
 
   await app.listen(
     config.get<number>('PORT'),

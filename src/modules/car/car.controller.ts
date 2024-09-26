@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Query,HttpCode,HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, Query, HttpCode, HttpStatus } from '@nestjs/common';
 import { CarService } from './car.service';
 import { CreateCarDto } from './dtos';
 

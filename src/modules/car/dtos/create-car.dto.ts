@@ -1,7 +1,8 @@
-import { IsInt, IsNumber, IsString, Max, Min, isBoolean } from 'class-validator';
+import { IsBoolean, IsInt, IsNumber, IsString, Max, Min } from 'class-validator';
 import { CreateCarRequest } from '../interfaces';
+import { boolean } from 'joi';
 
-export class CreateCarDto implements CreateCarRequest {
+export class CreateCarDto  {
     @IsString()
     brand: string;
 
@@ -16,9 +17,9 @@ export class CreateCarDto implements CreateCarRequest {
     @IsNumber()
     @Min(100)
     @Max(50000)
-    rating: number;
+    rentalPrice: number;
 
-    @isBoolean()
+    @IsBoolean()
     available: {
         type: Boolean;
         default: true;
